@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <title>{% block title %}Local Talk{% endblock %}</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="https://res.cloudinary.com/dqe39dixt/image/upload/v1691587138/ltg-1000-1000_hd6bna.png"
+                alt="LocalTalk Logo" class="logo-image">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Used 'ml-auto' to move the menu to the right -->
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/promo">Promo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- End of container -->
+    </nav>
+<header class="hero-image">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>Mats & Tooli are</p>
+                <h1>Local Talk</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <!-- Footer section -->
+    <footer class="mt-5 custom-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Column 1 -->
+                <div class="col-md-4 text-left">
+                    <h5>Contact:</h5>
+                    <p>123 Main Street, City, Country</p>
+                    <p>Email: contact@localtalk.com</p>
+                </div>
+    
+                <!-- Column 2 -->
+                <div class="col-md-4 text-left">
+                    <h5>Follow us:</h5>
+                    <ul class="social-links">
+                        <li><a href="https://localtalk.bandcamp.com" target="_blank"><i class="fab fa-bandcamp"></i>
+                                Bandcamp</a></li>
+                        <li><a href="https://www.instagram.com/localtalkrecords/?hl=en" target="_blank"><i
+                                    class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://www.facebook.com/LocalTalkRecords" target="_blank"><i
+                                    class="fab fa-facebook"></i> Facebook</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Column 3 -->
+                <div class="col-md-4 text-left">
+                    <h5>Menu:</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">News</a></li>
+                        <li><a href="">Promo</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Copyright -->
+            <div class="row mt-3">
+                <div class="col-md-12 text-center">
+                    <p>&copy; 2023 Local Talk. All rights reserved.</p>
+                </div>
+                <div class="col-md-12 text-center">
+                    <p><a href="https://www.kode-s.nu" target="_blank" class="footer-link">Website powered by Kode-S.</a>
+                    </p>
+                </div>
+    
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
