@@ -30,21 +30,20 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    <!-- Used 'ml-auto' to move the menu to the right -->
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/news">News</a>
+                        <a class="nav-link" href="{% url 'news' %}">News</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/promo">Promo</a>
+                        <a class="nav-link" href="{% url 'promo' %}">Promo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
                 </ul>
             </div>
@@ -93,11 +92,11 @@
                 <div class="col-md-4 text-left">
                     <h5>Menu:</h5>
                     <ul class="list-unstyled">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">News</a></li>
-                        <li><a href="">Promo</a></li>
-                        <li><a href="">Contact</a></li>
-                        <li><a href="">Login</a></li>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'news' %}">News</a></li>
+                        <li><a href="{% url 'promo' %}">Promo</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
                     </ul>
                 </div>
             </div>
