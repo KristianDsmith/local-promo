@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gruppo&family=Permanent+Marker&family=Roboto:wght@100;300;400;500;700&display=swap');
-
 body {
     font-family: 'Bebas Neue', sans-serif;
     background-color: rgb(239, 239, 239);
@@ -16,6 +14,7 @@ body {
     padding-left: 100px;
     /* Adjust this value to control the space on the left */
     padding-right: 100px;
+    font-family: 'Bebas Neue';
 }
 
 .navbar-brand {
@@ -81,11 +80,13 @@ body {
     color: #fff;
     font-size: 104px;
     font-weight: bold;
+    font-family: 'Bebas Neue';
 }
 
 .hero-image p {
     color: #fff;
     font-size: 36px;
+    font-family: 'Bebas Neue';
 }
 
 /* Footer */
@@ -93,6 +94,8 @@ body {
     background-color: rgb(216, 216, 216);
     padding: 30px 0;
     color: #555;
+    font-family: 'Bebas Neue', sans-serif;
+    line-height: 1.5;
 }
 
 .custom-footer h5 {
@@ -100,16 +103,10 @@ body {
     font-weight: bold;
 }
 
-.custom-footer p,
-.custom-footer ul li a,
-.footer-link {
+.custom-footer p {
     font-size: 16px;
-    color: #555;
-    text-decoration: none;
-    position: relative;
-    /* Add this line */
-    display: inline-block;
-    /* Add this line */
+    margin-bottom: 10px;
+    /* Adjust as needed */
 }
 
 .custom-footer ul {
@@ -121,9 +118,17 @@ body {
     margin-bottom: 10px;
 }
 
+.custom-footer ul li a,
+.footer-link {
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+}
+
 .custom-footer ul li a::after,
 .footer-link::after {
-    /* Add this line to apply the same effect to .footer-link */
     content: '';
     width: 0;
     height: 3px;
@@ -131,7 +136,6 @@ body {
     position: absolute;
     left: 0;
     bottom: 0;
-    /* Change this line from -6px to 0 */
     transition: 0.5s;
     transform-origin: left;
     visibility: hidden;
@@ -139,7 +143,6 @@ body {
 
 .custom-footer ul li a:hover::after,
 .footer-link:hover::after {
-    /* Add this line to apply the same effect to .footer-link */
     visibility: visible;
     width: 100%;
 }
@@ -162,4 +165,65 @@ body {
 /* Font Awesome icons */
 i {
     margin-right: 5px;
+}
+
+/* index html */
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 20px;
+}
+
+.box-container {
+    color: white;
+    width: calc(50% - 20px);
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease; /* Transition effect for opacity */
+}
+
+.box-container:hover {
+    opacity: 0.7; /* Change opacity on hover */
+}
+
+.box {
+    height: 500px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Drop shadow */
+}
+
+.box h2 {
+    background-color: #28a745;
+    display: inline-block; /* Wrap around the text */
+    padding: 5px;
+    border-radius: 3px; /* Optional rounded corners */
+    font-size: 26px;
+    font-family: 'Bebas Neue';
+}
+
+.news-box {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)),
+                     url('https://res.cloudinary.com/dqe39dixt/image/upload/v1691341506/media/record_covers/dan-tenor-city-tom-funk_p6stzn.jpg');
+}
+
+.promo-box {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)),
+                     url('https://res.cloudinary.com/dqe39dixt/image/upload/v1691603072/local-talk-promo_cmlj9d.jpg');
+}
+
+.contact-box {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)),
+                     url('https://res.cloudinary.com/dqe39dixt/image/upload/v1691602498/local-talk-contact_sfwrkb.jpg');
+}
+
+.login-box {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)),
+                     url('https://res.cloudinary.com/dqe39dixt/image/upload/v1691603688/local-talk-login_zxwgu3.png');
 }
