@@ -19,20 +19,31 @@ from welcome.views import news as your_news_view
 from welcome.views import promo as your_promo_view
 from welcome.views import contact as your_contact_view
 from welcome.views import login as your_login_view
+from promo.views import promo_view as your_signup_view
+
+
 from django.contrib import admin
 from django.urls import path
-from news.views import news as your_news_view
-
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', welcome_index, name='home'),  # Use welcome_index here
+    path('', welcome_index, name='home'),
     path('news/', your_news_view, name='news'),
     path('promo/', your_promo_view, name='promo'),
     path('contact/', your_contact_view, name='contact'),
-    path('login/', your_login_view, name='login'),
-
+    path('login/', your_login_view, name='login'),  # Custom login view
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('signup/', your_signup_view, name='signup'),  # Corrected signup view
+    path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
+
+
+
+
 
 
 
