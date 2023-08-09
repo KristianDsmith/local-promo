@@ -27,6 +27,11 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.views import LogoutView
+from promo.views import profile_view
+from promo.views import promo_music_view
+from promo.views import feedback_view
+from promo.views import download_track
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +44,11 @@ urlpatterns = [
     path('signup/', your_signup_view, name='signup'),  # Corrected signup view
     path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('profile/', profile_view, name='profile'),
+    path('promo_music/', promo_music_view, name='promo_music'),
+    path('feedback/<int:track_id>/', feedback_view, name='feedback'),
+    path('download/<int:track_id>/', download_track, name='download_track'),
+
 ]
 
 

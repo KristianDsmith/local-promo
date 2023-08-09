@@ -6,4 +6,8 @@ class NewsArticleAdmin(admin.ModelAdmin):
     list_display = ('headline',)
 
 
+
+
+
 admin.site.register(NewsArticle, NewsArticleAdmin)
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Promo Music</h1>
+{% for track in tracks %}
+<h2>{{ track.title }} by {{ track.artist }}</h2>
+<audio controls>
+    <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+</audio>
+<img src="{{ track.artwork_image.url }}" alt="Artwork for {{ track.title }}" />
+<p>{{ track.description }}</p>
+{% if track.id in feedbacks %}
+<a href="{% url 'download_track' track.id %}">Download</a>
+{% endif %}
+{% endfor %}
+{% endblock %}
