@@ -21,6 +21,8 @@ from welcome.views import contact as your_contact_view
 from welcome.views import login as your_login_view
 from django.contrib import admin
 from django.urls import path
+from news.views import news as your_news_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +31,7 @@ urlpatterns = [
     path('promo/', your_promo_view, name='promo'),
     path('contact/', your_contact_view, name='contact'),
     path('login/', your_login_view, name='login'),
+
 ]
 
 

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+<script src="{% static 'js/script.js' %}"></script>
+
+{% block content %}
+<div class="container">
+    <h1 class="news-title">Latest News</h1>
+    <div class="row">
+        {% for article in news_articles %}
+        <div class="col-md-4 mb-4">
+            <div class="article-card">
+                <div class="image-container">
+                    <img src="{{ article.image.url }}" class="article-image" alt="{{ article.title }}">
+                    <div class="overlay">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.headline }}</p>
+                    </div>
+                </div>
+                <div class="article-details" id="article-details-{{ article.id }}">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.content }}</p>
+                    <a href="{{ article.link }}" target="_blank" class="btn btn-primary green-link">Link</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="articleModal" tabindex="-1" role="dialog" aria-labelledby="articleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="articleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="articleModalBody"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
