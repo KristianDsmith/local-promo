@@ -2,35 +2,41 @@
 
 {% block content %}
 
-<!-- Grid container -->
-<div class="row justify-content-center align-items-center">
-  <!-- News Box -->
-  <div class="col-md-6 col-lg-6 col-sm-12 box-container">
-    <div class="box news-box">
-      <h2>News</h2>
+<div class="row">
+    <!-- News Box -->
+    <div class="col-md-6 col-lg-6 col-sm-12 box-container">
+        <a href="{% url 'news' %}">
+            <div class="box news-box">
+                <h2>News</h2>
+            </div>
+        </a>
     </div>
-  </div>
+<!-- Promo Box -->
+<div class="col-md-6 col-lg-6 col-sm-12 box-container">
+    <a href="{% url 'promo' %}">
+        <div class="box promo-box">
+            <h2>Promo</h2>
+        </div>
+    </a>
+</div>
 
-  <!-- Promo Box -->
-  <div class="col-md-6 col-lg-6 col-sm-12 box-container">
-    <div class="box promo-box">
-      <h2>Promo</h2>
-    </div>
-  </div>
+<!-- Contact Box -->
+<div class="col-md-6 col-lg-6 col-sm-12 box-container">
+    <a href="{% url 'contact' %}">
+        <div class="box contact-box">
+            <h2>Contact</h2>
+        </div>
+    </a>
+</div>
 
-  <!-- Contact Box -->
-  <div class="col-md-6 col-lg-6 col-sm-12 box-container">
-    <div class="box contact-box">
-      <h2>Contact</h2>
-    </div>
-  </div>
-
-  <!-- Login Box -->
-  <div class="col-md-6 col-lg-6 col-sm-12 box-container">
-    <div class="box login-box">
-      <h2>Login</h2>
-    </div>
-  </div>
+<!-- Login Box -->
+<div class="col-md-6 col-lg-6 col-sm-12 box-container">
+    <a href="{% url 'login' %}">
+        <div class="box login-box">
+            <h2>Login</h2>
+        </div>
+    </a>
+</div>
 </div>
 <!-- End of Grid container -->
 {% endblock %}
