@@ -4,21 +4,44 @@
 <div class="profile-page">
     <h1 class="profile-header">{{ user.username }}'s Profile</h1>
     <div class="profile-details">
-<div>
-    <h2>Username:</h2>
-    <p>{{ user.username }}</p>
-</div>
-<div>
-    <h2>Genre:</h2>
-    <p>{{ profile.genre }}</p>
-</div>
-<div>
-    <h2>Country:</h2>
-    <p>{{ profile.country }}</p>
-</div>
-<!-- Add other fields as needed -->
+        <div>
+            <h2>Username:</h2>
+            <p>{{ user.username }}</p>
+        </div>
+        <div>
+            <h2>Genre:</h2>
+            <p>{{ profile.genre }}</p>
+        </div>
+        <div>
+            <h2>Country:</h2>
+            <p>{{ profile.country }}</p>
+        </div>
+        <!-- Add other fields as needed -->
 
-<!-- Add Edit Profile button if user is viewing their own profile -->
+        <!-- Add Edit Profile button if user is viewing their own profile -->
+    </div>
 
+    <!-- New Section for Track Details -->
+    <div class="track-profile">
+        <h2 class="track-header">Featured Track</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ track.image.url }}" alt="{{ track.title }}" class="track-image">
+            </div>
+            <div class="col-md-8">
+                <h3 class="track-title">{{ track.title }}</h3>
+                <p class="artist-name">Artist: {{ track.artist_name }}</p>
+                <p class="duration">Duration: {{ track.duration }}</p>
+                <p class="release-date">Release Date: {{ track.release_date }}</p>
+                <p class="track-info">About the Track: {{ track.info }}</p>
+                <audio controls>
+                    <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
 

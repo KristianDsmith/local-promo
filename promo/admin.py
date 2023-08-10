@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import MusicTrack 
+from promo.models import Track
 
 
 class MusicTrackAdmin(admin.ModelAdmin):
@@ -9,3 +10,4 @@ class MusicTrackAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MusicTrack, MusicTrackAdmin)
+admin.site.register(Track)

@@ -12,6 +12,8 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .forms import SignupForm
+from django.shortcuts import render, get_object_or_404
+from promo.models import Track
 
 
 def promo_view(request):
@@ -97,3 +99,8 @@ def signup_view(request):
 class CustomLoginView(LoginView):
     template_name = 'login.html'
     authentication_form = AuthenticationForm
+
+
+def track_profile(request, track_id):
+    track = get_object_or_404(Track, pk=track_id)
+    return render(request, 'track_profile.html', {'track': track})

@@ -34,3 +34,16 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback by {self.user.username} on {self.track.title}"
+
+
+class Track(models.Model):
+    image = models.ImageField(upload_to='tracks/images/')
+    title = models.CharField(max_length=255)
+    artist_name = models.CharField(max_length=255)
+    duration = models.CharField(max_length=50)
+    release_date = models.DateField()
+    info = models.TextField()
+    audio_file = models.FileField(upload_to='tracks/audio/')
+
+    def __str__(self):
+        return self.title
