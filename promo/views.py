@@ -1,3 +1,5 @@
+from .models import UserProfile
+from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from promo.models import MusicTrack, Feedback
@@ -5,10 +7,11 @@ from promo.forms import FeedbackForm
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from promo.forms import CustomUserCreationForm
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .forms import ExtendedUserCreationForm
+from django.contrib.auth.views import LoginView
 
 
 def promo_view(request):
@@ -18,9 +21,12 @@ def promo_view(request):
 
 
 def profile_view(request):
-    user_profile = request.user.profile
-    # You can access additional fields on the UserProfile model here
-    return render(request, 'profile.html', {'profile': user_profile})
+    user = request.user
+    if user.is_authenticated:
+        profile = UserProfile.objects.get(user=user)
+        return render(request, 'profile.html', {'profile': profile, 'user': user})
+
+
 
 
 def promo_music_view(request):
@@ -66,7 +72,7 @@ class MusicTrackDetailView(DetailView):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = ExtendedUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_staff = False          # Ensure the user is not staff
@@ -78,5 +84,9 @@ def signup_view(request):
             # Redirect to the profile page only for regular users
             return redirect('profile')
     else:
-        form = CustomUserCreationForm()
+        form = ExtendedUserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+    authentication_form = AuthenticationForm

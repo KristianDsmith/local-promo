@@ -23,7 +23,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from promo.views import profile_view, promo_music_view, feedback_view, download_track, MusicTrackListView, MusicTrackDetailView
 from django.conf.urls.static import static
 from promo.views import signup_view
-
+from promo.views import CustomLoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,7 +31,7 @@ urlpatterns = [
     path('news/', your_news_view, name='news'),
     path('promo/', your_promo_view, name='promo'),
     path('contact/', your_contact_view, name='contact'),
-    path('login/', your_login_view, name='login'),  # Custom login view
+    path('login/', CustomLoginView.as_view(), name='login'),  # Custom login view
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', profile_view, name='profile'),
     path('promo_music/', promo_music_view, name='promo_music'),
@@ -41,6 +41,12 @@ urlpatterns = [
     path('music/<int:pk>/', MusicTrackDetailView.as_view(),
          name='music_track_detail'),
     path('signup/', signup_view, name='signup'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(),
+         name='password_reset'),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+    path('profile/<str:username>/', profile_view, name='profile'),
+
 
 ]
 

@@ -1,7 +1,7 @@
 from django import forms
-from .models import Feedback
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Feedback
 
 
 class FeedbackForm(forms.ModelForm):
@@ -14,7 +14,7 @@ class FeedbackForm(forms.ModelForm):
         }
 
 
-class CustomUserCreationForm(UserCreationForm):
+class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
