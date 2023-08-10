@@ -3,20 +3,13 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <!-- You can put any promotional content or images here -->
-            <div class="promo-box">
-                <h2>Welcome to Our Site!</h2>
-                <p>Some information about your service...</p>
-            </div>
-        </div>
-        <div class="col-md-6">
+        <div class="col-12">
             <div class="signup-box">
                 <h2>Create Account</h2>
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary">Create Account</button>
+                    <button type="submit">Create Account</button>
                 </form>
                 <p>Already have an account? <a href="{% url 'login' %}">Log in here</a></p>
             </div>

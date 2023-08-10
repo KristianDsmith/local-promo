@@ -10,8 +10,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .forms import ExtendedUserCreationForm
 from django.contrib.auth.views import LoginView
+from .forms import SignupForm
 
 
 def promo_view(request):
@@ -20,13 +20,11 @@ def promo_view(request):
     return render(request, 'promo.html', {'signup_form': signup_form, 'login_form': login_form})
 
 
-def profile_view(request):
+def profile_view(request, username=None):
     user = request.user
     if user.is_authenticated:
         profile = UserProfile.objects.get(user=user)
         return render(request, 'profile.html', {'profile': profile, 'user': user})
-
-
 
 
 def promo_music_view(request):
@@ -72,20 +70,29 @@ class MusicTrackDetailView(DetailView):
 
 def signup_view(request):
     if request.method == 'POST':
-        form = ExtendedUserCreationForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_staff = False          # Ensure the user is not staff
-            user.is_superuser = False      # Ensure the user is not a superuser
-            user.save()                    # Now save the user
-            login(request, user)           # Log the user in
-            messages.success(
-                request, 'Your account has been created successfully. You are now logged in.')
-            # Redirect to the profile page only for regular users
-            return redirect('profile')
+            user = form.save()  # Saving the user
+            genre = form.cleaned_data.get('genre')
+            country = form.cleaned_data.get('country')
+            user_profile, created = UserProfile.objects.get_or_create(
+                user=user)
+            user_profile.genre = genre
+            user_profile.country = country
+            user_profile.save()
+
+            # Logging in the user
+            login(request, user)
+
+            # Redirect to the user's profile
+            return redirect('profile_with_username', username=user.username)
+
+
     else:
-        form = ExtendedUserCreationForm()
+        form = SignupForm()
+
     return render(request, 'signup.html', {'form': form})
+
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'

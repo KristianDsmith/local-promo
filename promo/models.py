@@ -4,16 +4,13 @@ from cloudinary.models import CloudinaryField
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name='profile')
-    profile_picture = CloudinaryField('image', blank=True, null=True)
-    bio = models.TextField(blank=True, null=True)
-    favorite_genre = models.CharField(max_length=100, blank=True, null=True)
-    # ... other fields as needed ...
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    genre = models.CharField(max_length=100, null=True, blank=True)
+    country = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
-
+        
 class MusicTrack(models.Model):
     title = models.CharField(max_length=255)
     artist = models.CharField(max_length=255)

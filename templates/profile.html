@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ user.username }}'s Profile</h1>
+<div class="profile-page">
+    <h1 class="profile-header">{{ user.username }}'s Profile</h1>
+    <div class="profile-details">
 <div>
-    <img src="{{ profile.profile_picture.url }}" alt="Profile picture" />
+    <h2>Username:</h2>
+    <p>{{ user.username }}</p>
 </div>
 <div>
-    <h2>Bio:</h2>
-    <p>{{ profile.bio }}</p>
+    <h2>Genre:</h2>
+    <p>{{ profile.genre }}</p>
 </div>
 <div>
-    <h2>Favorite Genre:</h2>
-    <p>{{ profile.favorite_genre }}</p>
+    <h2>Country:</h2>
+    <p>{{ profile.country }}</p>
 </div>
 <!-- Add other fields as needed -->
 
 <!-- Add Edit Profile button if user is viewing their own profile -->
-{% if user == request.user %}
-{% endif %}
+
 {% endblock %}
+
