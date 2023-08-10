@@ -1,12 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
 from cloudinary.models import CloudinaryField
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile')
+    profile_picture = CloudinaryField('image', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    favorite_genre = models.CharField(max_length=100, blank=True, null=True)
+    # ... other fields as needed ...
 
+    def __str__(self):
+        return self.user.username
 
 class MusicTrack(models.Model):
     title = models.CharField(max_length=255)
@@ -19,7 +25,6 @@ class MusicTrack(models.Model):
     cover_image = CloudinaryField('image', blank=True, null=True)  # Optional
     music_file = CloudinaryField('audio', null=True, blank=True)
 
-
     def __str__(self):
         return self.title
 
@@ -30,18 +35,5 @@ class Feedback(models.Model):
     feedback_text = models.TextField()
     rating = models.IntegerField()
 
-
-def download_track(request, track_id):
-    track = MusicTrack.objects.get(pk=track_id)
-    if Feedback.objects.filter(user=request.user, track=track).exists():
-        # Provide download
-        file_path = track.audio_file.path
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(
-                fh.read(), content_type="application/octet-stream")
-            response['Content-Disposition'] = 'inline; filename=' + \
-                os.path.basename(file_path)
-            return response
-    else:
-        # Redirect to feedback page
-        return HttpResponseRedirect('/path/to/feedback/page')
+    def __str__(self):
+        return f"Feedback by {self.user.username} on {self.track.title}"

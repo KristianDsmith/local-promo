@@ -13,24 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-from welcome.views import index as welcome_index
-from welcome.views import news as your_news_view
-from welcome.views import promo as your_promo_view
-from welcome.views import contact as your_contact_view
-from welcome.views import login as your_login_view
+from django.conf import settings
+from welcome.views import index as welcome_index, news as your_news_view, promo as your_promo_view, contact as your_contact_view, login as your_login_view
 from promo.views import promo_view as your_signup_view
-
-
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.views import LogoutView
-from promo.views import profile_view
-from promo.views import promo_music_view
-from promo.views import feedback_view
-from promo.views import download_track
+from django.contrib.auth.views import LoginView, LogoutView
+from promo.views import profile_view, promo_music_view, feedback_view, download_track, MusicTrackListView, MusicTrackDetailView
+from django.conf.urls.static import static
+from promo.views import signup_view
 
 
 urlpatterns = [
@@ -41,15 +33,22 @@ urlpatterns = [
     path('contact/', your_contact_view, name='contact'),
     path('login/', your_login_view, name='login'),  # Custom login view
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('signup/', your_signup_view, name='signup'),  # Corrected signup view
-    path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
     path('profile/', profile_view, name='profile'),
     path('promo_music/', promo_music_view, name='promo_music'),
     path('feedback/<int:track_id>/', feedback_view, name='feedback'),
     path('download/<int:track_id>/', download_track, name='download_track'),
+    path('music/', MusicTrackListView.as_view(), name='music_tracks_list'),
+    path('music/<int:pk>/', MusicTrackDetailView.as_view(),
+         name='music_track_detail'),
+    path('signup/', signup_view, name='signup'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
 
 
 

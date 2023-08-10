@@ -316,3 +316,36 @@ i {
     border: #fff !important;
     /* Apply the !important rule to override Bootstrap styles */
 }
+
+/* sign up page */
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.promo-box {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.signup-box {
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

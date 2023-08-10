@@ -1,8 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Your promo content here -->
-<h1>Special Promotions</h1>
-<p>Check out our latest deals and offers!</p>
-<!-- you can include more specific details about the promotions here -->
+<div class="container">
+    <div class="row">
+
+        <!-- The Link Box You Provided -->
+        <div class="col-md-6 col-lg-6 col-sm-12 box-container">
+                <div class="box login-box">
+                    <h2>Login</h2>
+                </div>
+        </div>
+
+        <!-- Sign Up and Login Forms -->
+        <div class="col-md-6 col-lg-6 col-sm-12 box-container">
+
+            <!-- Sign Up Form -->
+            <div class="signup-form">
+                <h2>Sign Up</h2>
+                <form method="post" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    {{ signup_form.as_p }}
+                    <button type="submit">Create Account</button>
+                </form>
+            </div>
+
+            <!-- Login Form -->
+            <div class="login-form">
+                <h2>Login</h2>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    {{ login_form.as_p }}
+                    <button type="submit">Log in</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
 {% endblock %}
