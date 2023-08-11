@@ -14,7 +14,6 @@ body {
     padding-left: 100px;
     /* Adjust this value to control the space on the left */
     padding-right: 100px;
-    font-family: 'Bebas Neue';
 }
 
 .navbar-brand {
@@ -80,13 +79,11 @@ body {
     color: #fff;
     font-size: 104px;
     font-weight: bold;
-    font-family: 'Bebas Neue';
 }
 
 .hero-image p {
     color: #fff;
     font-size: 36px;
-    font-family: 'Bebas Neue';
 }
 
 /* Footer */
@@ -94,7 +91,6 @@ body {
     background-color: rgb(216, 216, 216);
     padding: 30px 0;
     color: #555;
-    font-family: 'Bebas Neue', sans-serif;
     line-height: 1.5;
 }
 
@@ -217,7 +213,6 @@ i {
     padding: 5px;
     border-radius: 3px; /* Optional rounded corners */
     font-size: 26px;
-    font-family: 'Bebas Neue';
 }
 
 .news-box {
@@ -250,14 +245,12 @@ i {
     margin-top: 20px;
     margin-left: 20px;
     /* Add this line */
-    font-family: 'Bebas Neue', sans-serif;
 }
 
 .article-card {
     position: relative;
     overflow: hidden;
     margin-top: 20px;
-    font-family: 'Bebas Neue', sans-serif;
 }
 
 .image-container {
@@ -319,6 +312,11 @@ i {
 
 /* sign up page */
 
+
+input {
+    text-transform: none !important;
+}
+
 .container {
     margin: 0 auto;
     max-width: 1200px;
@@ -338,7 +336,7 @@ i {
 }
 
 .btn {
-    background-color: #007bff;
+    background-color: #28a745;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -347,7 +345,7 @@ i {
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #28a745;
 }
 
 /* Profile Page */
@@ -367,13 +365,11 @@ i {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
-    font-family: 'Bebas Neue', sans-serif;
     color: #555;
 }
 
 .profile-details div {
     margin-bottom: 20px;
-    font-family: 'Bebas Neue', sans-serif;
     color: #555;
 }
 
@@ -397,7 +393,6 @@ i {
     padding: 30px;
     background-color: #f5f5f5;
     border-radius: 10px;
-    font-family: 'Bebas Neue', sans-serif;
     color: #555;
 }
 
@@ -415,7 +410,6 @@ i {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    font-family: 'Bebas Neue', sans-serif;
 }
 
 .signup-box h2 {
@@ -428,19 +422,18 @@ i {
 }
 
 .signup-box button {
-    background-color: #007bff;
+    background-color: #28a745;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 18px;
-    font-family: 'Bebas Neue', sans-serif;
     transition: background-color 0.3s;
 }
 
 .signup-box button:hover {
-    background-color: #0056b3;
+    background-color: #28a745;
 }
 
 .signup-box p {
@@ -448,7 +441,7 @@ i {
 }
 
 .signup-box a {
-    color: #007bff;
+    color: #28a745;
     text-decoration: none;
 }
 
@@ -479,7 +472,7 @@ i {
 }
 
 button {
-    background-color: #007bff;
+    background-color: #28a745;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -492,7 +485,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #28a745;
     /* Darken the button when hovered */
 }
 
@@ -537,3 +530,16 @@ button:hover {
 audio {
     width: 100%;
 }
+
+#audio_player .vjs-big-play-button,
+#audio_player .vjs-text-track-display,
+#audio_player .vjs-poster,
+#audio_player .vjs-error-display,
+#audio_player .vjs-fullscreen-control {
+    display: none !important;
+}
+
+#audio_player .vjs-control-bar {
+    width: 100% !important;
+}
+

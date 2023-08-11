@@ -17,8 +17,6 @@
             <p>{{ profile.country }}</p>
         </div>
         <!-- Add other fields as needed -->
-
-        <!-- Add Edit Profile button if user is viewing their own profile -->
     </div>
 
     <!-- New Section for Track Details -->
@@ -34,9 +32,16 @@
                 <p class="duration">Duration: {{ track.duration }}</p>
                 <p class="release-date">Release Date: {{ track.release_date }}</p>
                 <p class="track-info">About the Track: {{ track.info }}</p>
-                <audio controls>
-                    <source src="{{ track.audio_file.url }}" type="audio/mpeg">
-                    Your browser does not support the audio element.
+                <!-- Custom Audio Player -->
+                <div class="custom-audio-player">
+                    <button id="playPauseButton" onclick="togglePlayPause()">Play</button>
+                    <input type="range" id="seekSlider" min="0" max="100" value="0" step="1" oninput="seekAudio()">
+                    <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                </div>
+                <!-- Hidden Audio Element -->
+                <audio id="audioElement" preload="metadata" ontimeupdate="updateTime()"
+                    onloadedmetadata="initializePlayer()">
+                    <source src="{{ track.audio_file_url }}" type="audio/mpeg">
                 </audio>
             </div>
         </div>
@@ -44,4 +49,41 @@
 </div>
 {% endblock %}
 
+{% block extra_js %}
+<script>
+    var audioElement = document.getElementById('audioElement');
+    var playPauseButton = document.getElementById('playPauseButton');
+    var seekSlider = document.getElementById('seekSlider');
+    var currentTime = document.getElementById('currentTime');
+    var totalTime = document.getElementById('totalTime');
 
+    function initializePlayer() {
+        var totalMinutes = Math.floor(audioElement.duration / 60);
+        var totalSeconds = Math.floor(audioElement.duration % 60);
+        if (totalSeconds < 10) totalSeconds = '0' + totalSeconds;
+        totalTime.textContent = totalMinutes + ':' + totalSeconds;
+    }
+
+    function togglePlayPause() {
+        if (audioElement.paused) {
+            audioElement.play();
+            playPauseButton.textContent = 'Pause';
+        } else {
+            audioElement.pause();
+            playPauseButton.textContent = 'Play';
+        }
+    }
+
+    function seekAudio() {
+        audioElement.currentTime = (seekSlider.value / 100) * audioElement.duration;
+    }
+
+    function updateTime() {
+        var currentMinutes = Math.floor(audioElement.currentTime / 60);
+        var currentSeconds = Math.floor(audioElement.currentTime % 60);
+        if (currentSeconds < 10) currentSeconds = '0' + currentSeconds;
+        currentTime.textContent = currentMinutes + ':' + currentSeconds;
+        seekSlider.value = (audioElement.currentTime / audioElement.duration) * 100;
+    }
+</script>
+{% endblock %}
