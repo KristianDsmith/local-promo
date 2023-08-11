@@ -3,9 +3,8 @@ from .models import Track
 
 
 class TrackAdmin(admin.ModelAdmin):
-    list_display = ['title', 'artist_name', 'album', 'genre', 'release_date']
-    search_fields = ['title', 'artist_name']
-    list_filter = ['genre']
+    list_display = ('title', 'artist_name', 'genre',
+                    'release_date', 'duration')
 
 
 admin.site.register(Track, TrackAdmin)

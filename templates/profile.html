@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="profile-page">
-    <h1 class="profile-header">{{ user.username }}'s Profile</h1>
+    <h1 class="profile-header">{{ user.username }}'s</h1>
     <div class="profile-details">
         <div>
             <h2>Username:</h2>
@@ -24,14 +24,16 @@
         <h2 class="track-header">Featured Track</h2>
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ track.image.url }}" alt="{{ track.title }}" class="track-image">
+                <img src="{{ track.cover_image.url }}" alt="{{ track.title }}" class="track-image">
+
+
             </div>
             <div class="col-md-8">
                 <h3 class="track-title">{{ track.title }}</h3>
                 <p class="artist-name">Artist: {{ track.artist_name }}</p>
-                <p class="duration">Duration: {{ track.duration }}</p>
+                <p class="duration">Duration: {{ track.duration_display }}</p>
                 <p class="release-date">Release Date: {{ track.release_date }}</p>
-                <p class="track-info">About the Track: {{ track.info }}</p>
+                <p class="track-info">About the Track: {{ track.description }}</p>
                 <!-- Custom Audio Player -->
                 <div class="custom-audio-player">
                     <button id="playPauseButton" onclick="togglePlayPause()">Play</button>
@@ -46,6 +48,29 @@
             </div>
         </div>
     </div>
+    <div class="track-profile feedback-form-section">
+        <h2 class="track-header feedback-header">Provide Your Feedback</h2>
+        <form method="post" class="feedback-form">
+            {% csrf_token %}
+            <div class="feedback-form-group">
+                <label for="{{ form.rating.id_for_label }}" class="feedback-label">Rating (1-5):</label>
+                {{ form.rating }}
+            </div>
+            <div class="feedback-form-group">
+                <label for="{{ form.feedback.id_for_label }}" class="feedback-label">Feedback:</label>
+                {{ form.feedback }}
+            </div>
+            <div class="feedback-form-group">
+                <label for="{{ form.use_in_sets.id_for_label }}" class="feedback-label">Will you use in sets:</label>
+                {{ form.use_in_sets }}
+            </div>
+            <button type="submit" class="btn-submit-feedback">Submit Feedback</button>
+        </form>
+    </div>
+
+
+
+
 </div>
 {% endblock %}
 

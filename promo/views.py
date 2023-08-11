@@ -26,8 +26,20 @@ def profile_view(request, username=None):
     user = request.user
     if user.is_authenticated:
         profile = UserProfile.objects.get(user=user)
-        track = Track.objects.first()
-        return render(request, 'profile.html', {'profile': profile, 'user': user, 'track': track})
+        track = Track.objects.first()  # or however you want to retrieve the track
+
+        if request.method == 'POST':
+            form = FeedbackForm(request.POST)
+            if form.is_valid():
+                feedback = form.save(commit=False)
+                feedback.user = request.user
+                feedback.track = track
+                feedback.save()
+                # Redirect or add a success message
+        else:
+            form = FeedbackForm()
+
+        return render(request, 'profile.html', {'profile': profile, 'user': user, 'track': track, 'form': form})
     else:
         return redirect('login')
 

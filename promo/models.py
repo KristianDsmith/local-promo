@@ -13,20 +13,17 @@ class UserProfile(models.Model):
 
 
 class Track(models.Model):
-    profile = models.ForeignKey(
-        UserProfile, related_name='tracks', on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=225)
     artist_name = models.CharField(max_length=225)
-    album = models.CharField(max_length=255, blank=True, null=True)
     genre = models.CharField(max_length=100, null=True, blank=True)
     release_date = models.DateField(null=True, blank=True)
-    duration = models.PositiveIntegerField(null=True, blank=True)
+    duration = models.PositiveIntegerField(null=True, blank=True)  # In seconds
     description = models.TextField(blank=True, null=True)
-    cover_image = CloudinaryField('image', blank=True, null=True)
-    music_file = CloudinaryField('audio', null=True, blank=True)
-    audio_file_url = models.FileField(
-        upload_to='tracks/', default='default/path/to/file')
-    image = models.ImageField(upload_to='track_images/')
+    cover_image = CloudinaryField(
+        'image', blank=True, null=True)  # Image field for cover
+    audio_file_url = models.URLField(
+        default='https://example.com/default/path/to/file'
+    )   # Audio file field
 
     def __str__(self):
         return self.title
