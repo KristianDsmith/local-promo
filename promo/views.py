@@ -1,7 +1,7 @@
 import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from promo.models import UserProfile, Track, Feedback
+from promo.models import UserProfile, Track
 from promo.forms import FeedbackForm, SignupForm
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -9,10 +9,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from promo.models import Track
 from django.urls import reverse
-from django.contrib.auth.views import LoginView
-from django.contrib.auth import login
+
+
+
+
 
 
 def promo_view(request):
@@ -35,6 +36,7 @@ def profile_view(request, username=None):
                 feedback.user = request.user
                 feedback.track = track
                 feedback.save()
+                return redirect('thank_you')
                 # Redirect or add a success message
         else:
             form = FeedbackForm()
@@ -61,8 +63,8 @@ def feedback_view(request, track_id):
             feedback.user = request.user
             feedback.track = track
             feedback.save()
-            # Redirect to music promotion page or a success page
-            return redirect('promo_music')
+            return redirect('thank_you')
+
     else:
         form = FeedbackForm()
     return render(request, 'feedback.html', {'form': form, 'track': track})
@@ -116,30 +118,20 @@ logger = logging.getLogger(__name__)
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
-
+    
     def form_valid(self, form):
-        """Security check complete. Log the user in."""
         self.user = form.get_user()
         login(self.request, self.user)
 
-        success_url = reverse('profile_with_username', kwargs={
-                              'username': self.request.user.username})
-        print(
-            f"User {self.user.username} logged in. Redirecting to {success_url}")
-
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        print(f"Login form is invalid: {form.errors}")
-        return super().form_invalid(form)
-
-    def get_success_url(self):
-        url = reverse('profile_with_username', kwargs={
-                      'username': self.request.user.username})
-        return url
+        return redirect(reverse('profile_with_username', kwargs={'username': self.user.username}))
 
 
 
 def track_profile(request, track_id):
     track = get_object_or_404(Track, pk=track_id)
     return render(request, 'track_profile.html', {'track': track})
+
+
+def thank_you_view(request):
+    return render(request, 'thank_you.html')
+

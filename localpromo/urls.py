@@ -21,6 +21,10 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+from promo.views import thank_you_view
+from promo.views import feedback_view
+from django.urls import reverse
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,6 +46,8 @@ urlpatterns = [
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(),
          name='password_reset_done'),
     path('track/<int:track_id>/', track_profile, name='track_profile'),
+    path('feedback/', feedback_view, name='feedback'),
+    path('thank_you/', thank_you_view, name='thank_you'),
 ]
 
 if settings.DEBUG:

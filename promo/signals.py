@@ -4,13 +4,17 @@ from django.dispatch import receiver
 from .models import UserProfile  # Import UserProfile instead of Profile
 
 
-def save_user_profile(sender, instance, **kwargs):
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
     if instance.is_superuser:
         return
-    instance.profile.save()
+    # Use get_or_create to either get the existing profile or create a new one
+    UserProfile.objects.get_or_create(user=instance)
 
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    # Use UserProfile instead of Profile
-    UserProfile.objects.get_or_create(user=instance)
+def save_user_profile(sender, instance, **kwargs):
+    if instance.is_superuser:
+        return
+    if hasattr(instance, 'profile'):
+        instance.profile.save()
