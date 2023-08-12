@@ -37,3 +37,14 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f"Feedback by {self.user.username} on {self.track.title}"
+
+
+class DownloadableTrack(models.Model):
+    name = models.CharField(max_length=255)
+    download_url = models.URLField(
+        max_length=500, default="http://example.com/default-url")
+
+    # ... any other fields ...
+
+    def __str__(self):
+        return self.name

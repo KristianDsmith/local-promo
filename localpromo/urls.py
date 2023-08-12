@@ -13,17 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from promo.views import download_music
 from django.conf import settings
 from welcome.views import index as welcome_index, news as your_news_view, promo as your_promo_view, contact as your_contact_view, login as your_login_view
-from promo.views import profile_view, promo_music_view, feedback_view, download_track, MusicTrackListView, MusicTrackDetailView, signup_view, CustomLoginView, track_profile
+from promo.views import profile_view, promo_music_view, feedback_view, MusicTrackListView, MusicTrackDetailView, signup_view, CustomLoginView, track_profile, download_music
 from promo.models import Track
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
-from promo.views import thank_you_view
+from promo import views
 from promo.views import feedback_view
 from django.urls import reverse
+
 
 
 urlpatterns = [
@@ -37,7 +39,6 @@ urlpatterns = [
     path('profile/<str:username>/', profile_view, name='profile_with_username'),
     path('promo_music/', promo_music_view, name='promo_music'),
     path('feedback/<int:track_id>/', feedback_view, name='feedback_view'),
-    path('download/<int:track_id>/', download_track, name='download_track'),
     path('music/', MusicTrackListView.as_view(), name='track_list'),
     path('music/<int:pk>/', MusicTrackDetailView.as_view(), name='track_detail'),
     path('signup/', signup_view, name='signup'),
@@ -47,7 +48,12 @@ urlpatterns = [
          name='password_reset_done'),
     path('track/<int:track_id>/', track_profile, name='track_profile'),
     path('feedback/', feedback_view, name='feedback'),
-    path('thank_you/', thank_you_view, name='thank_you'),
+    path('thank_you/<int:track_id>/', views.thank_you_view, name='thank_you'),
+    path('download/<int:track_id>/', download_music, name='download_music'),
+
+
+
+    
 ]
 
 if settings.DEBUG:

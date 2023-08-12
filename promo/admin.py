@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Track
+from promo.models import Track
+from promo.models import DownloadableTrack
 
 
 class TrackAdmin(admin.ModelAdmin):
@@ -7,4 +8,9 @@ class TrackAdmin(admin.ModelAdmin):
                     'release_date', 'duration')
 
 
+class DownloadableTrackAdmin(admin.ModelAdmin):
+    list_display = ['name', 'download_url']
+
+
 admin.site.register(Track, TrackAdmin)
+admin.site.register(DownloadableTrack, DownloadableTrackAdmin)

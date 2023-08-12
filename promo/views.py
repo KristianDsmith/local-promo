@@ -10,6 +10,12 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
+from django.conf import settings
+from django.http import FileResponse
+from promo.models import DownloadableTrack
+from django.http import HttpResponseRedirect
+
+
 
 
 
@@ -36,7 +42,7 @@ def profile_view(request, username=None):
                 feedback.user = request.user
                 feedback.track = track
                 feedback.save()
-                return redirect('thank_you')
+                return redirect('thank_you', track_id=track.id)
                 # Redirect or add a success message
         else:
             form = FeedbackForm()
@@ -63,16 +69,11 @@ def feedback_view(request, track_id):
             feedback.user = request.user
             feedback.track = track
             feedback.save()
-            return redirect('thank_you')
+            return redirect('thank_you', track_id=track.id)
 
     else:
         form = FeedbackForm()
     return render(request, 'feedback.html', {'form': form, 'track': track})
-
-
-def download_track(request, track_id):
-    # Your code to handle downloading the track goes here
-    return HttpResponse("Downloading track with ID: " + str(track_id))
 
 
 class MusicTrackListView(ListView):
@@ -132,6 +133,15 @@ def track_profile(request, track_id):
     return render(request, 'track_profile.html', {'track': track})
 
 
-def thank_you_view(request):
-    return render(request, 'thank_you.html')
+def thank_you_view(request, track_id):
+    # Using Track instead of DownloadableTrack
+    track = get_object_or_404(Track, pk=track_id)
+    print(f"Thank you view with track ID: {track_id}")
+    return render(request, 'thank_you.html', {'track': track})
 
+
+def download_music(request, track_id):
+    track = get_object_or_404(DownloadableTrack, pk=track_id)
+    download_url = track.download_url
+    print(f"Track ID: {track_id}, Download URL: {download_url}")
+    return HttpResponseRedirect(download_url)
