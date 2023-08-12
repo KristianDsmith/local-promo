@@ -49,7 +49,6 @@ class DownloadableTrack(models.Model):
     name = models.CharField(max_length=255)
     download_url = models.URLField(
         max_length=500, default="http://example.com/default-url")
-    users = models.ManyToManyField(User, related_name="downloaded_tracks")
 
     # ... any other fields ...
 

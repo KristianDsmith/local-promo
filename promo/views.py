@@ -20,6 +20,7 @@ from promo.models import Feedback
 from django.http import JsonResponse
 from django.db.models import F, Count
 
+
 def promo_view(request):
     signup_form = UserCreationForm()
     login_form = AuthenticationForm()
@@ -28,8 +29,12 @@ def promo_view(request):
 
 def profile_view(request, username=None):
     logger.info(f"Entered profile_view with username {username}")
-    user = request.user
-    if user.is_authenticated:
+    print(f"Is user authenticated: {request.user.is_authenticated}")
+    print(f"username parameter: {username}")
+
+    if request.user.is_authenticated:
+        user = request.user
+        
         profile = UserProfile.objects.get(user=user)
         track = Track.objects.first()  # or however you want to retrieve the track
 

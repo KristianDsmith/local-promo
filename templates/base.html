@@ -122,6 +122,16 @@
         
         <!-- Video.js JavaScript -->
         <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Example jQuery include -->
+        <script>
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
+                        xhr.setRequestHeader("X-CSRFToken", $('[name="csrfmiddlewaretoken"]').val());
+                    }
+                }
+            });
+        </script>
         {% block extra_js %}{% endblock %}
     </footer>
 </body>

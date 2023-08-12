@@ -15,7 +15,7 @@ Including another URLconf
 """
 from promo.views import download_music
 from django.conf import settings
-from welcome.views import index as welcome_index, news as your_news_view, promo as your_promo_view, contact as your_contact_view, login as your_login_view
+from welcome.views import index as welcome_index, promo as your_promo_view, contact as your_contact_view, login as your_login_view
 from promo.views import profile_view, promo_music_view, feedback_view, MusicTrackListView, MusicTrackDetailView, signup_view, CustomLoginView, track_profile, download_music
 from promo.models import Track
 from django.contrib import admin
@@ -27,6 +27,7 @@ from promo.views import feedback_view
 from django.urls import reverse
 from promo.views import feedback_dashboard
 from promo.views import chart_data
+from news.views import news as your_news_view
 
 
 
