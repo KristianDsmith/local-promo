@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    #myChart {
+        max-width: 800px;
+        margin: 20px auto;
+    }
+
+    .container {
+        padding: 20px;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center">Feedback Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Feedback Metrics</h2>
+            <p>Average Rating: {{ average_rating }}</p>
+            <p>Feedback Count: {{ feedback_count }}</p>
+            <p>Will Play Track: {{ will_play_count }}</p>
+            <p>Active Users: {{ active_users }}</p>
+            <p>Listened to Audio: {{ listened_count }}</p>
+            <p>Downloaded: {{ downloaded_count }}</p>
+            <p>Country Distribution:</p>
+            {% for country, count in country_distribution %}
+            <p>{{ country }}: {{ count }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-6">
+            <h2>Feedback by User</h2>
+            {% for item in feedback_by_user %}
+            <p>User: {{ item.user }}, Count: {{ item.count }}</p>
+            {% endfor %}
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Add other sections to display other analytics as needed -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch('{% url "chart-data" %}')
+        .then(response => response.json())
+        .then(data => {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: data
+            });
+        });
+</script>
+{% endblock %}

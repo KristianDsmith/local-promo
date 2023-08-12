@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.utils import timezone
+
 
 
 class UserProfile(models.Model):
@@ -34,6 +36,10 @@ class Feedback(models.Model):
     track = models.ForeignKey(Track, on_delete=models.CASCADE)
     feedback_text = models.TextField()
     rating = models.IntegerField()
+    will_play_track = models.BooleanField(default=False)
+    listened_to_audio = models.BooleanField(default=False)
+    downloaded = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Feedback by {self.user.username} on {self.track.title}"
@@ -43,8 +49,18 @@ class DownloadableTrack(models.Model):
     name = models.CharField(max_length=255)
     download_url = models.URLField(
         max_length=500, default="http://example.com/default-url")
+    users = models.ManyToManyField(User, related_name="downloaded_tracks")
 
     # ... any other fields ...
 
     def __str__(self):
         return self.name
+
+
+class ListenedTrack(models.Model):  # New model
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    listened_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} listened to {self.track.title}"

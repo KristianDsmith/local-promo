@@ -14,13 +14,11 @@ from django.conf import settings
 from django.http import FileResponse
 from promo.models import DownloadableTrack
 from django.http import HttpResponseRedirect
-
-
-
-
-
-
-
+from django.db.models import Avg, Count
+from django.db.models.functions import TruncDay
+from promo.models import Feedback
+from django.http import JsonResponse
+from django.db.models import F, Count
 
 def promo_view(request):
     signup_form = UserCreationForm()
@@ -107,7 +105,6 @@ def signup_view(request):
             # Redirect to the user's profile
             return redirect('profile_with_username', username=user.username)
 
-
     else:
         form = SignupForm()
 
@@ -119,13 +116,12 @@ logger = logging.getLogger(__name__)
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
-    
+
     def form_valid(self, form):
         self.user = form.get_user()
         login(self.request, self.user)
 
         return redirect(reverse('profile_with_username', kwargs={'username': self.user.username}))
-
 
 
 def track_profile(request, track_id):
@@ -145,3 +141,61 @@ def download_music(request, track_id):
     download_url = track.download_url
     print(f"Track ID: {track_id}, Download URL: {download_url}")
     return HttpResponseRedirect(download_url)
+
+
+def feedback_dashboard(request):
+    # Feedback by user
+    feedback_by_user = Feedback.objects.values(
+        'user').annotate(count=Count('id'))
+
+    # Average rating
+    average_rating = Feedback.objects.aggregate(Avg('rating'))['rating__avg']
+
+    # Feedback count
+    feedback_count = Feedback.objects.count()
+
+    # Will play track count
+    will_play_count = Feedback.objects.filter(will_play_track=True).count()
+
+    # Country distribution
+    country_distribution = Feedback.objects.annotate(
+        country=F('user__userprofile__country')
+    ).values(
+        'country'
+    ).annotate(
+        count=Count('country')
+    )
+
+    # Active users
+    active_users = Feedback.objects.values('user').distinct().count()
+
+    # Listened to audio count
+    listened_count = Feedback.objects.filter(listened_to_audio=True).count()
+
+    # Downloaded count
+    downloaded_count = Feedback.objects.filter(downloaded=True).count()
+
+    context = {
+        'feedback_by_user': feedback_by_user,
+        'average_rating': average_rating,
+        'feedback_count': feedback_count,
+        'will_play_count': will_play_count,
+        'country_distribution': country_distribution,
+        'active_users': active_users,
+        'listened_count': listened_count,
+        'downloaded_count': downloaded_count,
+    }
+
+    return render(request, 'feedback_dashboard.html', context)
+
+
+def chart_data(request):
+    data = {
+        'labels': ['January', 'February', 'March'],
+        'datasets': [{
+            'label': 'Feedback',
+            'data': [10, 20, 15],
+            # Additional chart settings
+        }]
+    }
+    return JsonResponse(data)

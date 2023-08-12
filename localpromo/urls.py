@@ -25,6 +25,9 @@ from django.conf.urls.static import static
 from promo import views
 from promo.views import feedback_view
 from django.urls import reverse
+from promo.views import feedback_dashboard
+from promo.views import chart_data
+
 
 
 
@@ -50,6 +53,9 @@ urlpatterns = [
     path('feedback/', feedback_view, name='feedback'),
     path('thank_you/<int:track_id>/', views.thank_you_view, name='thank_you'),
     path('download/<int:track_id>/', download_music, name='download_music'),
+    path('feedback_dashboard/', views.feedback_dashboard,
+         name='feedback_dashboard'),
+    path('chart-data/', chart_data, name='chart-data'),
 
 
 
