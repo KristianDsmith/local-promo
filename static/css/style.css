@@ -231,6 +231,7 @@ i {
     padding: 10px;
     box-sizing: border-box;
     transition: opacity 0.5s ease; /* Transition effect for opacity */
+    height: 500px;
 }
 
 .custom-box-container:hover {
@@ -728,4 +729,99 @@ audio {
 
 .thank-you-title {
     font-family: 'Bebas Neue', sans-serif;
+}
+
+
+/* media screen sizes */
+
+@media screen and (max-width: 375px) {
+
+    .hero-image {
+            height: 400px;
+        }
+    
+        .hero-image h1 {
+            font-size: 84px;
+        }
+    
+        .hero-image p {
+            font-size: 26px;
+        }
+    
+        .shop-banner {
+            height: 200px;
+        }
+
+        .box {
+            height: 325px;
+            width: 325px;
+            margin: 0 auto;
+        }
+
+        .custom-row {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-details {
+            width: 90%;
+            /* take up 90% of the screen width */
+            max-height: 80%;
+            /* take up 80% of the screen height */
+            overflow-y: auto;
+            /* add scroll if content is too long */
+        }
+
+}
+
+@media screen and (max-width: 480px){
+
+        .shop-banner {
+            height: 250px;
+        }
+    
+        .box {
+            height: 400px;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .custom-row {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container {
+            width: 400px;
+            margin: 0 auto;
+        }
+        
+        .login-form {
+            margin-top: 20px;
+        }
+        
+        .article-details {
+            width: 90%;
+            /* take up 90% of the screen width */
+            max-height: 80%;
+            /* take up 80% of the screen height */
+            overflow-y: auto;
+            /* add scroll if content is too long */
+        }
+
+    
+}
+
+@media screen and (max-width: 768px) {
+    .box {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .box {
+        height: 400px;
+        width: 400px;
+    }
+
 }

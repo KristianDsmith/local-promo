@@ -13,28 +13,42 @@
         </div>
 
         <!-- Sign Up and Login Forms -->
-        <div class="custom-box-container">
-
+        <div class="row">
             <!-- Sign Up Form -->
-            <div class="signup-form">
-                <h2 class="sign-up-title">Sign Up</h2>
-                <form method="post" action="{% url 'signup' %}">
-                    {% csrf_token %}
-                    {{ signup_form.as_p }}
-                    <button type="submit">Create Account</button>
-                </form>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="sign-up-title">Sign Up</h2>
+                        <form method="post" action="{% url 'signup' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <!-- Assuming 'signup_form' contains Bootstrap-compatible form fields -->
+                                {{ signup_form.as_p }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-
+        
             <!-- Login Form -->
-            <div class="login-form">
-                <h2 class="login-title">Login</h2>
-                <form method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Log in</button>
-                </form>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="login-title">Login</h2>
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <!-- Assuming 'form' contains Bootstrap-compatible form fields -->
+                                {{ form.as_p }}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
+
 
     </div>
 </div>
