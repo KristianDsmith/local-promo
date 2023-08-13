@@ -32,6 +32,7 @@ from news.views import news as your_news_view
 
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', welcome_index, name='home'),
@@ -57,6 +58,9 @@ urlpatterns = [
     path('feedback_dashboard/', views.feedback_dashboard,
          name='feedback_dashboard'),
     path('chart-data/', chart_data, name='chart-data'),
+    path('welcome_login/', CustomLoginView.as_view(), name='welcome_login'),
+
+
 
 
 
