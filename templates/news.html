@@ -4,8 +4,10 @@
 <script src="{% static 'js/script.js' %}"></script>
 
 {% block content %}
+
+<h1 class="news-title">Latest News</h1>
 <div class="container">
-    <h1 class="news-title">Latest News</h1>
+    
     <div class="row">
         {% for article in news_articles %}
         <div class="col-md-4 mb-4">

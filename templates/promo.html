@@ -1,22 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
+<div class="custom-container">
+    <div class="custom-row">
 
         <!-- The Link Box You Provided -->
-        <div class="col-md-6 col-lg-6 col-sm-12 box-container">
-                <div class="box promo-box">
-                    <h2>Promo</h2>
-                </div>
+        <div class="custom-box-container">
+            <div class="box promo-box bg-transparent">
+                <!-- Add bg-transparent class here -->
+                <h2>Promo</h2>
+            </div>
         </div>
 
         <!-- Sign Up and Login Forms -->
-        <div class="col-md-6 col-lg-6 col-sm-12 box-container">
+        <div class="custom-box-container">
 
             <!-- Sign Up Form -->
             <div class="signup-form">
-                <h2>Sign Up</h2>
+                <h2 class="sign-up-title">Sign Up</h2>
                 <form method="post" action="{% url 'signup' %}">
                     {% csrf_token %}
                     {{ signup_form.as_p }}
@@ -26,7 +27,7 @@
 
             <!-- Login Form -->
             <div class="login-form">
-                <h2>Login</h2>
+                <h2 class="login-title">Login</h2>
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
                     {{ form.as_p }}

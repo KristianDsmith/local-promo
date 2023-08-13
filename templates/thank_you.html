@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Thank You for Your Feedback!</h1>
+<h1 class="thank-you-title">Thank You for Your Feedback!</h1>
 <p>Your feedback has been submitted successfully. You can download the music using the link below:</p>
 <a href="{% url 'download_music' track_id=track.id %}" class="download-link">Click here to download</a>
 {% endblock %}

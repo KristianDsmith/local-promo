@@ -73,6 +73,7 @@ body {
     align-items: center;
     color: #fff;
     text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .hero-image h1 {
@@ -165,7 +166,57 @@ i {
 
 /* index html */
 
-.row {
+
+.shop-title {
+    text-align: left;
+    /* Center align the text */
+    font-size: 32px;
+    /* Set the font size */
+    font-weight: bold;
+    /* Make the text bold */
+    margin-bottom: 20px;
+    /* Add some space below the title */
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.welcome-title {
+    text-align: left;
+    /* Center align the text */
+    font-size: 32px;
+    /* Set the font size */
+    font-weight: bold;
+    /* Make the text bold */
+    margin-top: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+/* banner */
+.shop-banner-container {
+    text-align: center;
+    width: 100%;
+    /* Ensuring the container takes up the full width */
+}
+
+.shop-banner {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0)), url('https://res.cloudinary.com/dqe39dixt/image/upload/v1691920376/local-talk-bandcamp-banner-logo_s16k7i.jpg');
+    height: 300px;
+    /* Set the height of the banner */
+    background-size: cover;
+    /* Cover the entire div with the image */
+    background-position: center;
+    /* Center the image */
+    width: 100%;
+    /* Ensuring the banner takes up the full width of its container */
+    transition: opacity 0.5s ease;
+    /* Transition effect for opacity */
+}
+
+.shop-banner:hover {
+    opacity: 0.7;
+    /* Change opacity on hover */
+}
+
+.custom-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -173,34 +224,33 @@ i {
     margin-top: 20px;
 }
 
-.box-container {
+.custom-box-container {
     color: white;
-    width: calc(50% - 20px);
+    width: calc(50% - 20px); /* 50% width for 2 columns layout */
     margin-bottom: 20px;
     padding: 10px;
     box-sizing: border-box;
     transition: opacity 0.5s ease; /* Transition effect for opacity */
 }
 
-.box-container:hover {
+.custom-box-container:hover {
     opacity: 0.7; /* Change opacity on hover */
 }
 
-.box-container a {
+.custom-box-containera {
     color: inherit;
     /* This will make the link text inherit the color of the parent element */
     text-decoration: none;
     /* This will remove the underline */
 }
 
-.box-container a h2 {
+.custom-box-container a h2 {
     color: #fff;
     /* You can set this to whatever color the text should be */
 }
 
 .box {
     height: 500px;
-    background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     background-size: cover;
     background-position: center;
@@ -211,8 +261,9 @@ i {
     background-color: #28a745;
     display: inline-block; /* Wrap around the text */
     padding: 5px;
-    border-radius: 3px; /* Optional rounded corners */
+     /* Optional rounded corners */
     font-size: 26px;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .news-box {
@@ -245,6 +296,7 @@ i {
     margin-top: 20px;
     margin-left: 20px;
     /* Add this line */
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .article-card {
@@ -295,7 +347,6 @@ i {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 999;
-    font-family: 'Bebas Neue', sans-serif;
 }
 
 .article-card:hover .article-details {
@@ -312,7 +363,6 @@ i {
 
 /* sign up page */
 
-
 input {
     text-transform: none !important;
 }
@@ -322,17 +372,18 @@ input {
     max-width: 1200px;
 }
 
-.promo-box {
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
+.sign-up-title {
+    font-family: 'Bebas Neue', sans-serif;
 }
 
+.login-title {
+    font-family: 'Bebas Neue', sans-serif;
+}
 .signup-box {
     padding: 20px;
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    
 }
 
 .btn {
@@ -366,6 +417,7 @@ input {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #555;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .profile-details div {
@@ -389,22 +441,6 @@ input {
     margin-top: 40px;
 }
 
-.promo-box {
-    padding: 30px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    color: #555;
-}
-
-.promo-box h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-.promo-box p {
-    font-size: 18px;
-}
-
 .signup-box {
     padding: 30px;
     background-color: #ffffff;
@@ -415,6 +451,7 @@ input {
 .signup-box h2 {
     font-size: 26px;
     margin-bottom: 20px;
+    
 }
 
 .signup-box form {
@@ -518,6 +555,7 @@ button:hover {
 .track-header {
     color: #333;
     font-weight: bold;
+    font-family: 'Bebas Neue', sans-serif;
 }
 
 .track-image {
@@ -677,4 +715,17 @@ audio {
 
 .feedback-col canvas {
     width: 100% !important;
+}
+
+/* Contact */
+
+.custom-container .btn.btn-primary.custom-submit-button {
+    background-color: #28a745;
+    /* Replace with your desired color */
+    border-color: #28a745;
+    /* If you want to change the border color as well */
+}
+
+.thank-you-title {
+    font-family: 'Bebas Neue', sans-serif;
 }
